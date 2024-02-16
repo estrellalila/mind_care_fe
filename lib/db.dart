@@ -5,6 +5,14 @@ import 'package:path/path.dart';
 class DatabaseService {
   static Database? _database;
 
+  static Future<void> insertUser(Map<String, dynamic> userData) async {
+    final db = await database;
+
+    // SQLite 데이터베이스에 유저 데이터 삽입
+    await db.insert('User', userData,
+        conflictAlgorithm: ConflictAlgorithm.replace);
+  }
+
   static Future<Database> get database async {
     if (_database != null) return _database!;
 
@@ -16,8 +24,9 @@ class DatabaseService {
       // 테이블 생성
       await db.execute('''
         CREATE TABLE User (
-          User_ID INTEGER PRIMARY KEY AUTOINCREMENT,
+          User_ID INTEGER PRIMARY KEY,
           Name TEXT NOT NULL,
+          email TEXT NOT NULL,
           Signup_date TEXT NOT NULL,
           is_Google INTEGER NOT NULL,
           is_Apple INTEGER NOT NULL,
@@ -46,6 +55,7 @@ class DatabaseService {
           Content_1 TEXT NOT NULL,
           Content_2 TEXT NOT NULL,
           Content_3 TEXT NOT NULL,
+          Content_4 TEXT NOT NULL,
           Date TEXT NOT NULL,
           Mood_ID INTEGER,
           FOREIGN KEY (User_ID) REFERENCES User(User_ID),
@@ -73,27 +83,30 @@ class DatabaseService {
     return _database!;
   }
 
-  /*
-  // 데이터 삽입 메서드
-  static Future<void> insertDiary(Map<String, dynamic> diary) async {
+  // 데이터 삽입 메서드 수정: 삽입된 일기의 ID 반환
+  static Future<int> insertDiary(Map<String, dynamic> diary) async {
     final db = await database;
-    await db.insert('Diary', Diary,
+    int id = await db.insert('Diary', diary,
         conflictAlgorithm: ConflictAlgorithm.replace);
-  }
-  
-  Future<void> addDiary() async {                               // 데이터베이스 서비스 클래스에 insertDiary 메서드를 호출하여 일기 데이터 삽입
-    Map<String, dynamic> diaryData = {                          // 삽입할 일기 데이터를 Map 형태로 준비
-      'Title': '일기1',
-      'Content_1': '내용123',
-    };
-    await DatabaseService.insertDiary(diaryData);                // insertDiary 메서드를 호출하여 데이터베이스에 데이터 삽입
+    return id; // 삽입된 일기의 ID 반환
   }
 
+  // 데이터 업데이트 메서드
+  static Future<void> updateDiary(
+      int diaryId, Map<String, dynamic> diaryData) async {
+    final db = await database;
+    await db.update(
+      'Diary',
+      diaryData,
+      where: 'Diary_ID = ?',
+      whereArgs: [diaryId],
+      conflictAlgorithm: ConflictAlgorithm.replace,
+    );
+  }
 
   // 데이터 조회 메서드
   static Future<List<Map<String, dynamic>>> getDiaries() async {
     final db = await database;
     return db.query('Diary');
   }
-  */
 }

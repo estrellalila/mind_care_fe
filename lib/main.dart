@@ -3,9 +3,13 @@ import 'package:flutter/material.dart';
 import 'package:mind_care/launch_screen.dart';
 import 'package:mind_care/login_page.dart';
 import 'dart:async';
+import 'package:sqflite/sqflite.dart';
+import 'db.dart';
 
 
-void main() {
+void main() async {
+  //Database db = await DatabaseService.database;
+
   runApp(MyApp());
 }
 
@@ -29,12 +33,12 @@ class _LaunchScreenState extends State<LaunchScreen> {
   void initState() {
     super.initState();
     // 타이머를 사용하여 2초 후에 홈 화면으로 이동
-    Timer(Duration(seconds: 2), () {
-      Navigator.pushReplacement(
-        context,
-        MaterialPageRoute(builder: (context) => LoginPage()),
-      );
-    });
+    // Timer(Duration(seconds: 1), () {
+    //   // Navigator.pushReplacement(
+    //   //   context,
+    //   //   MaterialPageRoute(builder: (context) => LoginPage()),
+    //   );
+    //});
   }
 
   @override

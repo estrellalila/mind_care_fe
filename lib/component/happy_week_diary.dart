@@ -1,52 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:mind_care/screen/home_screen.dart';
 
 class ShowDiaryfromList extends StatelessWidget{
+
+
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: PreferredSize(
-        preferredSize: Size.fromHeight(
-            42.0),
-        child: AppBar(
-          title: Text('주간 긍정일기',
-            style: TextStyle(
-              fontSize: 17,
-              fontWeight: FontWeight.bold,
-            ),
-          ),
-          centerTitle: true,
-        ),
-      ),
-      body: Column(
+    return Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Expanded(child: SingleChildScrollView(
-              child: Column(children: [
-                Container(// 주간 달력
-                  padding: EdgeInsets.symmetric(vertical: 0, horizontal: 24,),
-                  child: Text('2월 2주의 행복했던 순간들을\n되돌아보세요.',
-                    style: TextStyle(
-                      fontSize: 22,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                ),
-                Container(
-                  decoration: BoxDecoration(
-                    border: Border.all(
-                      width: 1,
-                      color: Colors.blue,
-                    ),
-                  ),
-                  padding: EdgeInsets.symmetric(vertical: 0, horizontal: 24,),
-                  child: Text('주간 달력 들어올 부분',
-                    style: TextStyle(
-                      fontSize: 50,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                ),
-                // 감정일기 제목 붙이기
                 Column( // 감정일기 페이지 요소
                   children: [
                     Container(
@@ -227,14 +189,8 @@ class ShowDiaryfromList extends StatelessWidget{
                     )
 
                 ),
-              ],)
-          ),
-          ),
-
-        ],
-      ),
-
-    );
+              ],
+          );
   }
 
 }

@@ -28,6 +28,9 @@ environment:
 # the latest version available on pub.dev. To see which dependencies have newer
 # versions available, run `flutter pub outdated`.
 dependencies:
+  timer_builder: ^2.0.0
+  shared_preferences: ^2.0.6
+  http: ^0.13.3
   permission_handler: ^11.3.0
   #flutter_local_notifications: ^16.3.2
   #flutter_native_timezone: ^2.0.0
@@ -41,8 +44,10 @@ dependencies:
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.2
-  table_calendar: 3.0.7
-  intl: 0.17.0
+  table_calendar: ^3.0.9
+  weekly_date_picker: ^1.4.2
+  flutter_calendar_week: ^3.0.2
+  intl: 0.18.1
   drift: 2.1.0
   sqlite3_flutter_libs: 0.5.10
   path_provider: 2.0.11
